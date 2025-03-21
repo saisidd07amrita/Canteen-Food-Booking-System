@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now - IT Canteen</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    background: #000;
+    color: #f5f5f5;
+    text-align: center;
+}
+header {
+    background: linear-gradient(to right, #1e1e1e, #333);
+    color: #ffcc00;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #333;
+    padding: 12px;
+    text-align: center;
+}
+th {
+    background-color: #333;
+    color: #ffcc00;
+}
+.quantity-btn {
+    cursor: pointer;
+    padding: 8px 12px;
+    background: none;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.quantity-btn:hover {
+    background: #ffcc00;
+    color: #000;
+}
+#total-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #ffcc00;
+}
+.place-order-btn {
+    display: inline-block;
+    background: #ffcc00;
+    color: #000;
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 20px;
+    transition: all 0.3s;
+    box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.3);
+}
+.place-order-btn:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <header>Order Now - IT Canteen</header>
+    <div class="container">
+        <h2>Select Your Items</h2>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+            </tr>
+            <tr><td>Chicken Biryani</td><td>150</td><td><button class="quantity-btn" onclick="updateQuantity(0, -1)">-</button> <span id="q0">0</span> <button class="quantity-btn" onclick="updateQuantity(0, 1)">+</button></td></tr>
+            <tr><td>Mutton Biryani</td><td>200</td><td><button class="quantity-btn" onclick="updateQuantity(1, -1)">-</button> <span id="q1">0</span> <button class="quantity-btn" onclick="updateQuantity(1, 1)">+</button></td></tr>
+            <tr><td>Egg Biryani</td><td>120</td><td><button class="quantity-btn" onclick="updateQuantity(2, -1)">-</button> <span id="q2">0</span> <button class="quantity-btn" onclick="updateQuantity(2, 1)">+</button></td></tr>
+            <tr><td>Butter Chicken & Roti</td><td>180</td><td><button class="quantity-btn" onclick="updateQuantity(3, -1)">-</button> <span id="q3">0</span> <button class="quantity-btn" onclick="updateQuantity(3, 1)">+</button></td></tr>
+            <tr><td>Chicken Curry & Ghee Rice</td><td>160</td><td><button class="quantity-btn" onclick="updateQuantity(4, -1)">-</button> <span id="q4">0</span> <button class="quantity-btn" onclick="updateQuantity(4, 1)">+</button></td></tr>
+            <tr><td>Fish Curry & Ghee Rice</td><td>170</td><td><button class="quantity-btn" onclick="updateQuantity(5, -1)">-</button> <span id="q5">0</span> <button class="quantity-btn" onclick="updateQuantity(5, 1)">+</button></td></tr>
+            <tr><td>Pepper Chicken</td><td>190</td><td><button class="quantity-btn" onclick="updateQuantity(6, -1)">-</button> <span id="q6">0</span> <button class="quantity-btn" onclick="updateQuantity(6, 1)">+</button></td></tr>
+            <tr><td>Chicken 65</td><td>140</td><td><button class="quantity-btn" onclick="updateQuantity(7, -1)">-</button> <span id="q7">0</span> <button class="quantity-btn" onclick="updateQuantity(7, 1)">+</button></td></tr>
+            <tr><td>Egg Masala & Chapati</td><td>100</td><td><button class="quantity-btn" onclick="updateQuantity(8, -1)">-</button> <span id="q8">0</span> <button class="quantity-btn" onclick="updateQuantity(8, 1)">+</button></td></tr>
+        </table>
+        <p id="total-price">Total Price: ₹0</p>
+    </div>
+    <script>
+        const prices = [150, 200, 120, 180, 160, 170, 190, 140, 100];
+        let quantities = Array(prices.length).fill(0);
+        
+        function updateQuantity(index, change) {
+            quantities[index] = Math.max(0, Math.min(5, quantities[index] + change));
+            document.getElementById(`q${index}`).textContent = quantities[index];
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            for (let i = 0; i < prices.length; i++) {
+                total += prices[i] * quantities[i];
+            }
+            document.getElementById('total-price').textContent = `Total Price: ₹${total}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Now - Main Canteen</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+body {
+    background: #000;
+    color: #f5f5f5;
+    text-align: center;
+}
+header {
+    background: linear-gradient(to right, #1e1e1e, #333);
+    color: #ffcc00;
+    padding: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: #1e1e1e;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+h2 {
+    color: #ffcc00;
+    margin-bottom: 15px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #333;
+    padding: 12px;
+    text-align: center;
+}
+th {
+    background-color: #333;
+    color: #ffcc00;
+}
+.quantity-btn {
+    cursor: pointer;
+    padding: 8px 12px;
+    background: none;
+    color: #ffcc00;
+    border: 1px solid #ffcc00;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+.quantity-btn:hover {
+    background: #ffcc00;
+    color: #000;
+}
+#total-price {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 25px;
+    color: #ffcc00;
+}
+.place-order-btn {
+    display: inline-block;
+    background: #ffcc00;
+    color: #000;
+    padding: 14px 28px;
+    font-size: 18px;
+    border-radius: 30px;
+    border: none;
+    margin-top: 20px;
+    transition: all 0.3s;
+    box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.3);
+}
+.place-order-btn:hover {
+    background: #e6b800;
+    transform: scale(1.05);
+}
+    </style>
+</head>
+<body>
+    <header>Order Now - Main Canteen</header>
+    <div class="container">
+        <h2>Select Your Items</h2>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+            </tr>
+            <tr><td>Idli & Sambar</td><td>30</td><td><button class="quantity-btn" onclick="updateQuantity(0, -1)">-</button> <span id="q0">0</span> <button class="quantity-btn" onclick="updateQuantity(0, 1)">+</button></td></tr>
+            <tr><td>Dosa (Masala/Plain)</td><td>40/30</td><td><button class="quantity-btn" onclick="updateQuantity(1, -1)">-</button> <span id="q1">0</span> <button class="quantity-btn" onclick="updateQuantity(1, 1)">+</button></td></tr>
+            <tr><td>Pongal</td><td>35</td><td><button class="quantity-btn" onclick="updateQuantity(2, -1)">-</button> <span id="q2">0</span> <button class="quantity-btn" onclick="updateQuantity(2, 1)">+</button></td></tr>
+            <tr><td>Vada (2 pieces)</td><td>25</td><td><button class="quantity-btn" onclick="updateQuantity(3, -1)">-</button> <span id="q3">0</span> <button class="quantity-btn" onclick="updateQuantity(3, 1)">+</button></td></tr>
+            <tr><td>Chapati & Curry</td><td>50</td><td><button class="quantity-btn" onclick="updateQuantity(4, -1)">-</button> <span id="q4">0</span> <button class="quantity-btn" onclick="updateQuantity(4, 1)">+</button></td></tr>
+            <tr><td>Veg Thali</td><td>80</td><td><button class="quantity-btn" onclick="updateQuantity(5, -1)">-</button> <span id="q5">0</span> <button class="quantity-btn" onclick="updateQuantity(5, 1)">+</button></td></tr>
+            <tr><td>Paneer Butter Masala & Roti</td><td>90</td><td><button class="quantity-btn" onclick="updateQuantity(6, -1)">-</button> <span id="q6">0</span> <button class="quantity-btn" onclick="updateQuantity(6, 1)">+</button></td></tr>
+            <tr><td>Curd Rice</td><td>40</td><td><button class="quantity-btn" onclick="updateQuantity(7, -1)">-</button> <span id="q7">0</span> <button class="quantity-btn" onclick="updateQuantity(7, 1)">+</button></td></tr>
+            <tr><td>Lemon Rice</td><td>40</td><td><button class="quantity-btn" onclick="updateQuantity(8, -1)">-</button> <span id="q8">0</span> <button class="quantity-btn" onclick="updateQuantity(8, 1)">+</button></td></tr>
+            <tr><td>Sambar Rice</td><td>45</td><td><button class="quantity-btn" onclick="updateQuantity(9, -1)">-</button> <span id="q9">0</span> <button class="quantity-btn" onclick="updateQuantity(9, 1)">+</button></td></tr>
+            <tr><td>Chicken Biryani</td><td>120</td><td><button class="quantity-btn" onclick="updateQuantity(10, -1)">-</button> <span id="q10">0</span> <button class="quantity-btn" onclick="updateQuantity(10, 1)">+</button></td></tr>
+            <tr><td>Veg Biryani</td><td>100</td><td><button class="quantity-btn" onclick="updateQuantity(11, -1)">-</button> <span id="q11">0</span> <button class="quantity-btn" onclick="updateQuantity(11, 1)">+</button></td></tr>
+        </table>
+        <p id="total-price">Total Price: ₹0</p>
+
+        <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+    <script>
+        const prices = [30, 40, 35, 25, 50, 80, 90, 40, 40, 45, 120, 100];
+        let quantities = new Array(prices.length).fill(0);
+        
+        function updateQuantity(index, change) {
+            quantities[index] = Math.min(5, Math.max(0, quantities[index] + change));
+            document.getElementById(`q${index}`).textContent = quantities[index];
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            for (let i = 0; i < prices.length; i++) {
+                total += prices[i] * quantities[i];
+            }
+            document.getElementById('total-price').textContent = `Total Price: ₹${total}`;
+        }
+
+        function placeOrder() {
+            let orderDetails = [];
+            for (let i = 0; i < prices.length; i++) {
+                if (quantities[i] > 0) {
+                    orderDetails.push(`Item ${i + 1}: ${quantities[i]} qty`);
+                }
+            }
+            if (orderDetails.length === 0) {
+                alert("Please select at least one item.");
+            } else {
+                alert("Order placed successfully!\n\n" + orderDetails.join("\n"));
+                window.location.href = 'orderconfirmed.html';
+            }
+        }
+    </script>
+</body>
+</html>

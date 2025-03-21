@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MBA Canteen Menu</title>
+</head>
+<body data-canteen="MBA">
+    <h1>MBA Canteen Menu</h1>
+    <table border="1">
+        <tr>
+            <th>Item</th>
+            <th>Price (₹)</th>
+        </tr>
+    </table>
+
+    <script>
+        async function fetchMenu(canteen) {
+            try {
+                console.log(`Fetching menu for: ${canteen}`);
+                
+                let response = await fetch(`http://127.0.0.1:5000/menu/${canteen}`);
+                let data = await response.json();
+
+                console.log("Server Response:", data);
+
+                if (!Array.isArray(data)) {
+                    throw new Error("Invalid data format! Expected an array.");
+                }
+
+                let menuTable = document.querySelector("table");
+                menuTable.innerHTML = `
+                    <tr>
+                        <th>Item</th>
+                        <th>Price (₹)</th>
+                    </tr>
+                `;
+
+                data.forEach(item => {
+                    let row = document.createElement("tr");
+                    row.innerHTML = `<td>${item.name}</td><td>${item.price}</td>`;
+                    menuTable.appendChild(row);
+                });
+
+            } catch (error) {
+                console.error("❌ Error fetching menu:", error);
+            }
+        }
+
+        window.onload = function() {
+            let canteen = document.body.getAttribute("data-canteen");
+            if (!canteen || canteen === "null") {
+                console.error("❌ Canteen name is missing!");
+                return;
+            }
+            fetchMenu(canteen);
+        };
+    </script>
+</body>
+</html>

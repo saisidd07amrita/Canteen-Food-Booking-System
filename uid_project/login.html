@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amrita Canteen - Login & Registration</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <div class="header">
+        <img src="amritalogo.png" alt="Amrita Logo" class="logo">
+        <span class="campus-title">📍 Amrita Coimbatore Campus</span>
+        <span class="timestamp" id="currentTime">3/19/2025, 12:04:30 AM</span>
+    </div>
+    
+    
+    
+    
+    <div class="container">
+        <div class="form-container">
+            <div class="toggle-buttons">
+                <button type="button" id="registerBtn" class="toggle-btn active">Register</button>
+                <button type="button" id="loginBtn" class="toggle-btn">Login</button>
+            </div>
+
+            <div class="form-box register active-form">
+                <form id="registerForm">
+                    <h1>Registration</h1>
+                    
+                    <div class="input-box">
+                        <input type="text" id="regUsername" placeholder="Username" required>
+                        <i class='bx bxs-user'></i>
+                        <span class="error-message" id="regUsernameError"></span>
+                    </div>
+                    
+                    <div class="input-box">
+                        <input type="email" id="regEmail" placeholder="Email" required>
+                        <i class='bx bxs-envelope'></i>
+                        <span class="error-message" id="regEmailError"></span>
+                    </div>
+                    
+                    <div class="input-box">
+                        <input type="password" id="regPassword" placeholder="Enter the password" required>
+                        <i class='bx bxs-lock'></i>
+                        <span class="error-message" id="regPasswordError"></span>
+                    </div>
+                   
+                    <button type="submit" class="btn">Register</button>
+                    
+                    <p>or register with other platforms</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-google'></i></a>
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-github'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="form-box login">
+                <form id="loginForm">
+                    <h1>Login</h1>
+                    
+                    <div class="input-box">
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                        <i class='bx bxs-user'></i>
+                        <span class="error-message" id="loginUsernameError"></span>
+                    </div>
+                    
+                    <div class="input-box">
+                        <input type="password" id="loginPassword" placeholder="Enter the password" required>
+                        <i class='bx bxs-lock'></i>
+                        <span class="error-message" id="loginPasswordError"></span>
+                    </div>
+                    
+                    <div class="forgotlink">
+                        <a href="#">Forgot Password</a>
+                    </div>
+                    
+                    <button type="submit" class="btn">Login</button>
+                    
+                    <p>or login with other platforms</p>
+                    <div class="social-icons">
+                        <a href="#"><i class='bx bxl-google'></i></a>
+                        <a href="#"><i class='bx bxl-facebook'></i></a>
+                        <a href="#"><i class='bx bxl-github'></i></a>
+                        <a href="#"><i class='bx bxl-linkedin'></i></a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="footer">
+        © 2025 Amrita Vishwa Vidyapeetham. All Rights Reserved.
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+      
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleString();
+        }
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

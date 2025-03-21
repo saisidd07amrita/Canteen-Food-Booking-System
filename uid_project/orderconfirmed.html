@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: #000;
+            color: #f5f5f5;
+            text-align: center;
+            overflow-x: hidden;
+        }
+        header {
+            background: linear-gradient(to right, #1e1e1e, #333);
+            color: #ffcc00;
+            padding: 20px;
+            text-align: center;
+            font-size: 22px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 50px auto;
+            background: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(255, 255, 255, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+        h2 {
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+        .success-icon {
+            font-size: 50px;
+            color: #ffcc00;
+            margin-bottom: 15px;
+        }
+        .option-btn {
+            background: none;
+            color: #ffcc00;
+            border: 2px solid #ffcc00;
+            padding: 12px 22px;
+            font-size: 17px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin: 10px;
+        }
+        .option-btn:hover {
+            background: #ffcc00;
+            color: #000;
+            transform: scale(1.05);
+        }
+        #pickup-time, #delivery-timer {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #f5f5f5;
+        }
+        .back-btn {
+            display: inline-block;
+            background: #ffcc00;
+            color: #000;
+            padding: 14px 28px;
+            font-size: 18px;
+            border-radius: 30px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s;
+            box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.3);
+        }
+        .back-btn:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+        #delivery-video {
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+            display: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(255, 204, 0, 0.3);
+        }
+        
+        /* Ribbon Animation Styles */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .ribbon {
+            position: absolute;
+            width: 10px;
+            height: 30px;
+            background-color: #ffcc00;
+            top: -50px;
+            animation: fall linear forwards;
+        }
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) rotate(450deg);
+            }
+        }
+        footer {
+            background: linear-gradient(to right, #1e1e1e, #333);
+            color: #ffcc00;
+            text-align: center;
+            padding: 14px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #181818;
+            padding: 15px 0;
+            gap: 20px;
+            border-bottom: 3px solid #ffcc00;
+            box-shadow: 0px 4px 10px rgba(255, 204, 0, 0.3);
+        }
+        .nav-btn {
+            background: none;
+            color: #ffcc00;
+            border: 2px solid #ffcc00;
+            padding: 12px 22px;
+            font-size: 17px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+        .nav-btn:hover {
+            background: #ffcc00;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="confetti-container" id="confetti-container"></div>
+    
+    <header>Order Confirmation</header>
+    
+    <nav>
+        <a href="mainfile.html" class="nav-btn">Home</a>
+        <a href="menu.html" class="nav-btn">Menu</a>
+        <a href="contact.html" class="nav-btn">Contact</a>
+    </nav>
+    
+    <div class="container">
+        <span class="success-icon">✔️</span>
+        <h2>Thank You for Your Order!</h2>
+        <p>Your order has been successfully placed. Please choose how you would like to receive it.</p>
+        
+        <!-- Pickup and Delivery Buttons -->
+        <button class="option-btn" onclick="selectPickup()">Pickup from Canteen</button>
+        <button class="option-btn" onclick="selectDelivery()">Opt for Delivery</button>
+
+        <!-- Pickup Time Display -->
+        <p id="pickup-time" style="display: none;"></p>
+
+        <!-- Delivery Countdown Timer -->
+        <p id="delivery-timer" style="display: none;">Your order will arrive in <span id="countdown">10:00</span></p>
+
+        <!-- Delivery Video -->
+        <video id="delivery-video" controls>
+            <source src="delivery.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Back to Menu -->
+        <a href="menu.html" class="back-btn">Back to Menu</a>
+    </div>
+    
+    <footer>
+        &copy; 2025 Amrita Vishwa Vidyapeetham. All Rights Reserved.
+    </footer>
+
+    <script>
+        
+        // Create and animate ribbons when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createRibbons();
+        });
+        
+        function createRibbons() {
+            const container = document.getElementById('confetti-container');
+            const colors = ['#ffcc00', '#e6b800', '#ffdb4d', '#ffe680', '#fff0b3', '#f5f5f5'];
+            const ribbonCount = 150;
+            
+            for (let i = 0; i < ribbonCount; i++) {
+                const ribbon = document.createElement('div');
+                ribbon.classList.add('ribbon');
+                
+                // Random styles for each ribbon
+                ribbon.style.left = Math.random() * 100 + 'vw';
+                ribbon.style.width = (Math.random() * 10 + 5) + 'px';
+                ribbon.style.height = (Math.random() * 40 + 10) + 'px';
+                ribbon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                ribbon.style.opacity = Math.random() * 0.6 + 0.4;
+                
+                // Random rotation
+                ribbon.style.transform = `rotate(${Math.random() * 360}deg)`;
+                
+                // Random animation duration (slower for a more floating effect)
+                const duration = Math.random() * 3 + 3;
+                ribbon.style.animationDuration = duration + 's';
+                
+                // Random delay so they don't all fall at once
+                ribbon.style.animationDelay = Math.random() * 5 + 's';
+                
+                container.appendChild(ribbon);
+            }
+        }
+
+        function selectPickup() {
+            let now = new Date();
+            now.setMinutes(now.getMinutes() + 10); // Add 10 minutes
+
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12; // Convert to 12-hour format
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+
+            document.getElementById("pickup-time").innerHTML = "Pickup your order at: <strong>" + hours + ":" + minutes + " " + ampm + "</strong>";
+            document.getElementById("pickup-time").style.display = "block";
+            document.getElementById("delivery-timer").style.display = "none";
+            document.getElementById("delivery-video").style.display = "none"; // Hide video if Pickup selected
+        }
+
+        function selectDelivery() {
+            document.getElementById("pickup-time").style.display = "none";
+            document.getElementById("delivery-timer").style.display = "block";
+            document.getElementById("delivery-video").style.display = "block"; // Show video
+
+            let video = document.getElementById("delivery-video");
+            video.play(); // Auto-play the video
+
+            let timeLeft = 600; // 10 minutes in seconds
+            function updateTimer() {
+                let minutes = Math.floor(timeLeft / 60);
+                let seconds = timeLeft % 60;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                document.getElementById("countdown").innerText = minutes + ":" + seconds;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    document.getElementById("delivery-timer").innerHTML = "Your order has arrived!";
+                } else {
+                    setTimeout(updateTimer, 1000);
+                }
+            }
+            updateTimer();
+        }
+    </script>
+</body>
+</html> 

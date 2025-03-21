@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: #222;
+    color: white;
+}
+
+/* Header Section */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #ffd700;
+}
+
+.logo {
+    height: 50px;
+}
+
+.campus-title {
+    color: #ffd700;
+    font-size: 1.5rem;
+}
+
+.timestamp {
+    color: #ffd700;
+}
+
+/* Navigation Section */
+.navigation {
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+    background-color: #1a1a1a;
+    border-bottom: 1px solid #ffd700;
+}
+
+.nav-button {
+    margin: 0 15px;
+    padding: 8px 20px;
+    background: transparent;
+    border: 2px solid #ffd700;
+    border-radius: 30px;
+    color: #ffd700;
+    font-size: 16px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.nav-button:hover {
+    background-color: rgba(255, 215, 0, 0.2);
+}
+
+/* Main Container */
+.container {
+    width: 420px;
+    margin: 30px auto;
+    background: #222;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    overflow: hidden;
+}
+
+.form-container {
+    position: relative;
+    width: 100%;
+}
+
+/* Toggle Buttons */
+.toggle-buttons {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #333;
+}
+
+.toggle-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 15px 0;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    color: #ffd700;
+}
+
+.toggle-btn.active {
+    background: #1a1a1a;
+    color: #ffd700;
+    font-weight: bold;
+}
+
+
+.form-box {
+    display: none;
+    padding: 30px;
+    background: #222;
+}
+
+.form-box.active-form {
+    display: block;
+}
+
+h1 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ffd700;
+}
+
+
+.input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 25px 0;
+}
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #666;
+    padding: 0 10px 0 35px;
+    font-size: 16px;
+    color: #ccc;
+    transition: 0.3s;
+}
+
+.input-box input:focus {
+    border-bottom-color: #ffd700;
+}
+
+.input-box i {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 20px;
+    color: #777;
+}
+
+.input-box input:focus ~ i {
+    color: #ffd700;
+}
+
+/* Forgot Password Link */
+.forgotlink {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+}
+
+.forgotlink a {
+    color: #ffd700;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.forgotlink a:hover {
+    text-decoration: underline;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    height: 45px;
+    background: #ffd700;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #222;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #e6c200;
+}
+
+/* Social Media Section */
+.form-box p {
+    text-align: center;
+    margin: 20px 0;
+    color: #ccc;
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.social-icons a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-icons a i {
+    font-size: 20px;
+    color: #ccc;
+}
+
+.social-icons a:hover {
+    background: #333;
+}
+
+.social-icons a:hover i {
+    color: #ffd700;
+}
+
+
+.error-message {
+    display: block;
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 5px;
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+}
+
+
+.footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: auto;
+    background-color: #1a1a1a;
+    color: #ffd700;
+    border-top: 1px solid #ffd700;
+}
